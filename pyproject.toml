@@ -1,0 +1,42 @@
+[project]
+name = "dagster-ceda"
+version = "0.1.0"
+description = "Dagster integration for ingesting data from the CEDA Archive."
+readme = "README.md"
+authors = [
+  { name = "Mike Blackett", email = "27811528+mikeblackett@users.noreply.github.com" },
+]
+requires-python = ">=3.12"
+dependencies = ["ceda-client", "dagster>=1.13.29"]
+
+[build-system]
+requires = ["uv_build>=0.13.7,<0.14.0"]
+build-backend = "uv_build"
+
+[tool.uv.sources]
+ceda-client = { git = "https://github.com/mikeblackett/ceda-client.git" }
+
+[dependency-groups]
+dev = [
+  "pyright>=1.1.414",
+  "pytest>=9.2.0",
+  "pytest-mock>=3.17.0",
+  "ruff>=0.17.4",
+]
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+
+[tool.ruff]
+line-length = 79
+
+[tool.ruff.format]
+docstring-code-format = true
+docstring-code-line-length = 79
+
+[tool.ruff.lint]
+extend-ignore = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
