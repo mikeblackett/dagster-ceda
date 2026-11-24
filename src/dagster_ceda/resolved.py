@@ -17,7 +17,7 @@ def _resolve_pattern(
     return re.compile(value)
 
 
-ResolvedPattern: TypeAlias = Annotated[
+ResolvedPattern: TypeAlias = Annotated[  # noqa: UP040
     Pattern,
     dg.Resolver(_resolve_pattern, model_field_type=str),
 ]
@@ -28,7 +28,7 @@ def _resolve_path(context: dg.ResolutionContext, raw_path: str) -> Path:
     return Path(value)
 
 
-ResolvedPath: TypeAlias = Annotated[
+ResolvedPath: TypeAlias = Annotated[  # noqa: UP040
     Path,
     dg.Resolver(_resolve_path, model_field_type=str),
 ]
@@ -39,7 +39,7 @@ def _resolve_upath(context: dg.ResolutionContext, raw_path: str) -> up.UPath:
     return up.UPath(value)
 
 
-ResolvedUPath: TypeAlias = Annotated[
+ResolvedUPath: TypeAlias = Annotated[  # noqa: UP040
     up.UPath,
     dg.Resolver(_resolve_upath, model_field_type=str),
 ]
@@ -57,7 +57,7 @@ def _resolve_key_prefix(
     return list(value)
 
 
-ResolvedKeyPrefix: TypeAlias = Annotated[
+ResolvedKeyPrefix: TypeAlias = Annotated[  # noqa: UP040
     str | Sequence[str],
     dg.Resolver(_resolve_key_prefix, model_field_type=str | Sequence[str]),
 ]
