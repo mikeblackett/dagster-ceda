@@ -27,6 +27,7 @@ class CEDAEntity(dg.Model, dg.Resolvable):
 class CEDAComponent(dg.Component, CEDAEntity):
     ceda_resource_key: str = DEFAULT_CEDA_RESOURCE_KEY
     entities: list[CEDAEntity]
+    io_manager_key: str | None = None
 
     def build_defs(self, context: dg.ComponentLoadContext) -> dg.Definitions:
         external = self.make_external_asset(context)
@@ -96,6 +97,7 @@ class CEDAComponent(dg.Component, CEDAEntity):
             name=f"{entity.name}_mirror_op",
             description="Mirrors remote files to a storage directory.",
             required_resource_keys={self.ceda_resource_key},
+            out=dg.Out(io_manager_key=self.io_manager_key),
         )
         def _op(
             context: dg.OpExecutionContext, manifest: cc.FileManifest

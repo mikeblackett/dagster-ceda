@@ -73,6 +73,7 @@ def test_component_defaults():
     component = CEDAComponent(name="dataset", path=DATA_FILES, entities=[])
     assert component.key_prefix == "ceda"
     assert component.ceda_resource_key == "ceda"
+    assert component.io_manager_key is None
 
 
 @pt.mark.parametrize(
@@ -371,9 +372,12 @@ def test_mirror_op_downloads_manifest(
         name="dataset",
         path=DATA_FILES,
         entities=[CEDAEntity(name="alpha", path=Path("sub"))],
+        io_manager_key="pickle",
     )
     op = component.make_mirror_op(load_context, component.entities[0])
     assert op.name == "alpha_mirror_op"
+    assert len(op.outs) == 1
+    assert next(iter(op.outs.values())).io_manager_key == "pickle"
 
     alpha = make_file("alpha.nc")
     manifest = FileManifest(files=(alpha,), path=DATA_DIR)
