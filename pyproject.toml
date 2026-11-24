@@ -1,6 +1,6 @@
 [project]
 name = "dagster-ceda"
-version = "0.3.0"
+version = "0.3.1"
 description = "Dagster integration for ingesting data from the CEDA Archive."
 readme = "README.md"
 authors = [

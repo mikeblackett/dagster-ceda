@@ -69,6 +69,7 @@ class CEDAComponent(dg.Component, CEDAEntity):
             description="Generates a manifest describing files in a remote directory.",
             required_resource_keys={self.ceda_resource_key},
             ins={"source": dg.In(dg.Nothing)},
+            out=dg.Out(io_manager_key=self.io_manager_key),
         )
         def _op(context: dg.OpExecutionContext) -> cc.FileManifest:
             path = self.path.joinpath(entity.path)

@@ -282,10 +282,13 @@ def test_manifest_op_partition_path(
         name="dataset",
         path=DATA_FILES,
         entities=[CEDAEntity(name="alpha", path=Path("sub"))],
+        io_manager_key="pickle",
     )
     op = component.make_manifest_op(load_context, component.entities[0])
     assert op.name == "alpha_manifest_op"
     assert op.required_resource_keys == frozenset({"ceda"})
+    assert len(op.outs) == 1
+    assert next(iter(op.outs.values())).io_manager_key == "pickle"
 
     manifest = FileManifest(files=(), path=f"{DATA_DIR}/sub")
     client = mocker.MagicMock()
